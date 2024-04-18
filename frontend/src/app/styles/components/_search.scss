@@ -24,4 +24,13 @@
   button {
     @include button-styles("primary");
   }
+
+  @include media-query(700px, max) {
+    input {
+      width: 100%;
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+  }
 }

@@ -22,4 +22,10 @@
     padding: 5px;
     outline: none;
   }
+
+  @include media-query(700px, max) {
+    label {
+      font-size: 15px;
+    }
+  }
 }

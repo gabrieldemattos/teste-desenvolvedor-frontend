@@ -53,4 +53,10 @@
   button {
     @include button-styles("secondary");
   }
+
+  @include media-query(600px, max) {
+    .button-wrapper {
+      flex-direction: column;
+    }
+  }
 }

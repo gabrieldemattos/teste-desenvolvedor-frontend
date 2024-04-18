@@ -30,3 +30,15 @@
     }
   }
 }
+
+@mixin media-query($breakpoint, $max-min) {
+  @if $max-min == "max" {
+    @media screen and (max-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
