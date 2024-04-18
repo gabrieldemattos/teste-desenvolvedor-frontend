@@ -4,6 +4,7 @@ import MedicineCard from "@/components/medicine-card";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
 import { IMedication } from "@/interface/MedicationData";
+import Search from "@/components/search";
 
 const Home = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
@@ -32,6 +33,12 @@ const Home = () => {
     <div className="container">
       <h1>Consulta de Medicamentos</h1>
 
+      <Search />
+
+      {!loading && !error && medicineData.length > 0 && (
+        <MedicineCard medicineData={medicineData} />
+      )}
+
       {loading && !error && (
         <div className="loading">
           <Loading />
@@ -39,10 +46,6 @@ const Home = () => {
       )}
 
       {error && <p className="error">{error}</p>}
-
-      {!loading && !error && medicineData.length > 0 && (
-        <MedicineCard medicineData={medicineData} />
-      )}
     </div>
   );
 };
