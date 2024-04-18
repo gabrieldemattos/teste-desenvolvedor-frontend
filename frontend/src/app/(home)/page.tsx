@@ -4,12 +4,14 @@ import MedicineCard from "@/components/medicine-card";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
 import { IMedication } from "@/interface/MedicationData";
-import Search from "@/components/search";
+import Button from "@/components/button";
 
 const Home = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +35,16 @@ const Home = () => {
     <div className="container">
       <h1>Consulta de Medicamentos</h1>
 
-      <Search />
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Busque pelo nome do medicamento ou laboratório.."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <Button text="Buscar" />
+      </div>
 
       {!loading && !error && medicineData.length > 0 && (
         <MedicineCard medicineData={medicineData} />
