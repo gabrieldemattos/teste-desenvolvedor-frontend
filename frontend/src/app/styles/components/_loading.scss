@@ -1,14 +1,19 @@
 .loading-container {
-  @extend .flex-container;
-
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
   height: 100%;
   width: 100%;
-  background-color: #f9f9f9;
+  align-items: center;
+  justify-content: center;
+  background-color: #111827ab;
 
   p {
     font-size: 24px;
     font-weight: bold;
-    color: #757575;
+    color: #fff;
     text-align: center;
   }
 }
@@ -22,8 +27,8 @@
   .spiner {
     height: 70px;
     width: 70px;
-    border-bottom: 4px solid #007bff;
-    border-top: 4px solid #007bff;
+    border-bottom: 4px solid #7dbcff;
+    border-top: 4px solid #7dbcff;
     border-radius: 100%;
     animation: spiner 1s linear infinite;
   }
