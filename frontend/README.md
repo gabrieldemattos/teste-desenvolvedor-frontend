@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bulário Eletrônico
 
-## Getting Started
+Bem-vindo(a) ao Bulário Eletrônico! Esta é uma aplicação desenvolvida em React com NextJS como parte do teste para a vaga de Desenvolvedor Frontend Jr.
 
-First, run the development server:
+## Sobre o Teste 💻
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+O teste consistiu em criar uma aplicação em React para um bulário eletrônico, permitindo a consulta de medicamentos por nome ou laboratório farmacêutico, apresentando os resultados em uma listagem com paginação de 10 itens por página.
+
+- [Repositório do Teste Prático para Desenvolvedor Frontend na Dotlib](https://github.com/Dotlib-BR/teste-desenvolvedor-frontend)
+
+## Funcionalidades Implementadas 📝
+
+- Gerar um PDF com as informações da bula.
+- Fazer download do PDF.
+- Interface responsiva.
+- Paginação de 10 em 10 items por página.
+- Consulta por nome do medicamento ou laboratório farmacêutico.
+- Possibilidade de ordernar pela data de publicação do medicamento.
+
+## Tecnologias Utilizadas 🚀
+
+- [React](https://reactjs.org/): Biblioteca JavaScript para construção de interfaces de usuário.
+- [pdfMake](http://pdfmake.org/#/): Utilizado para geração de arquivos PDF.
+- [Lucide React](https://lucide.dev/): Biblioteca de ícones.
+- [Next.js](https://nextjs.org/): Framework React para construção de aplicações web que oferece renderização do lado do servidor (SSR), geração estática (SSG), entre muitos outros recursos.
+- [Sass](https://sass-lang.com/): Pré-processador CSS.
+- [TypeScript](https://www.typescriptlang.org/): Superset de JavaScript que adiciona tipagem estática opcional.
+
+## Como Executar o Projeto ⚙️
+
+1. Clone este repositório: `git clone https://github.com/seu-usuario/bulario-eletronico.git`
+2. Navegue até o diretório do projeto: `cd frontend`
+3. Instale as dependências: `npm install`
+4. Carregue a API
+
+```sh
+npm install -g json-server
+
+json-server api/dotlib.json -s ./api/public
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Inicie a aplicação: `npm run dev`
+5. Acesse a aplicação em seu navegador: `http://localhost:3001`
+6. Utilize os seguintes endpoints para carregar as informações:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+# retorna todos os items paginados de 10 em 10
+GET http://localhost:3000/data
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# retorna um determinado medicamento consultado pelo id
+GET http://localhost:3000/data/:id
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# retorna os items paginados
+GET http://localhost:3000/data?_page=:number
+```
