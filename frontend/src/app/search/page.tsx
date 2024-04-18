@@ -54,7 +54,7 @@ const SearchPage = () => {
       <Search />
 
       <p className="results">
-        Resultados encontrados para <span>{query}</span>: {filteredData.length}
+        Resultados encontrados com <span>{query}</span>: {filteredData.length}
       </p>
 
       <OrderBy handleOrder={orderByDate} />
