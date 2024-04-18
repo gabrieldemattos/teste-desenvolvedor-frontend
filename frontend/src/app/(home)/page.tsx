@@ -8,6 +8,7 @@ import Button from "@/components/button";
 import { orderBy } from "./helpers/order-by";
 import Search from "@/components/search";
 import Container from "@/components/container";
+import ErrorMessage from "@/components/error-message";
 
 interface Pagination {
   prev: number | null;
@@ -26,8 +27,6 @@ const Home = () => {
   });
 
   const [pagination, setPagination] = useState<number>(1);
-
-  const [search, setSearch] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,17 +53,6 @@ const Home = () => {
     fetchData();
   }, [pagination]);
 
-  console.log(medicineData);
-
-  const filteredData =
-    search.length > 0
-      ? medicineData.filter(
-          (item) =>
-            item.name.toLowerCase().includes(search.toLowerCase()) ||
-            item.company.toLowerCase().includes(search.toLowerCase())
-        )
-      : medicineData;
-
   return (
     <Container>
       <div className="home-container">
@@ -75,7 +63,7 @@ const Home = () => {
         {!loading && !error && medicineData.length > 0 && (
           <div className="medicines-container">
             <MedicineCard
-              medicineData={orderBy(filteredData, selectedOption)}
+              medicineData={orderBy(medicineData, selectedOption)}
             />
 
             <div className="buttons">
@@ -94,13 +82,9 @@ const Home = () => {
           </div>
         )}
 
-        {loading && !error && (
-          <div className="loading">
-            <Loading />
-          </div>
-        )}
+        {loading && !error && <Loading />}
 
-        {error && <p className="error">{error}</p>}
+        {error && <ErrorMessage error={error} />}
       </div>
     </Container>
   );
