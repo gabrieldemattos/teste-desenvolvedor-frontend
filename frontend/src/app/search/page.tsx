@@ -48,7 +48,7 @@ const SearchPage = () => {
     <Container>
       <Search />
 
-      <p>
+      <p className="results">
         Resultados encontrados para <span>{query}</span>: {filteredData.length}
       </p>
 
