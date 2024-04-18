@@ -2,11 +2,12 @@
   @if $val == "primary" {
     @extend .button-base;
 
-    background: rgb(241, 237, 237);
+    background: rgb(230, 227, 227);
     color: #000;
+    font-weight: bold;
 
     &:hover {
-      background: rgb(228, 226, 226);
+      background: #ccc;
     }
   }
 
@@ -15,6 +16,7 @@
 
     background: #007bff;
     color: #fff;
+    font-weight: bold;
 
     &:hover {
       background: #0069d9;
