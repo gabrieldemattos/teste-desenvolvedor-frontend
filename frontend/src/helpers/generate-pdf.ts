@@ -2,6 +2,7 @@ import { IDocument, IMedication } from "@/interface/MedicationData";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
+import { formatDate } from "./format-date";
 
 // Define as fontes necessárias
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -53,9 +54,7 @@ export const generateBulaPDF = (
         text: [
           { text: "Data de emissão:".toUpperCase(), style: "name" },
           {
-            text: ` ${new Date(
-              medicationData.published_at
-            ).toLocaleDateString()}`,
+            text: ` ${formatDate(medicationData.published_at)}`,
             style: "data",
           },
         ],

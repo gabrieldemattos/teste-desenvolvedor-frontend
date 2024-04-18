@@ -2,6 +2,7 @@ import { generateBulaPDF } from "@/helpers/generate-pdf";
 import MedicineInformation from "./medicine-information";
 import Button from "./button";
 import { IMedication } from "@/interface/MedicationData";
+import { formatDate } from "@/helpers/format-date";
 
 interface MedicineCardProps {
   medicineData: IMedication[];
@@ -21,7 +22,7 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
 
           <MedicineInformation
             dataName="Data de emissão:"
-            dataInformation={medicine.published_at}
+            dataInformation={formatDate(medicine.published_at)}
           />
 
           <MedicineInformation
