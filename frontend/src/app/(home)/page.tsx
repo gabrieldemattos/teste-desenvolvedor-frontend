@@ -31,6 +31,15 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const filteredData =
+    search.length > 0
+      ? medicineData.filter(
+          (item) =>
+            item.name.toLowerCase().includes(search.toLowerCase()) ||
+            item.company.toLowerCase().includes(search.toLowerCase())
+        )
+      : medicineData;
+
   return (
     <div className="container">
       <h1>Consulta de Medicamentos</h1>
@@ -47,7 +56,7 @@ const Home = () => {
       </div>
 
       {!loading && !error && medicineData.length > 0 && (
-        <MedicineCard medicineData={medicineData} />
+        <MedicineCard medicineData={filteredData} />
       )}
 
       {loading && !error && (
