@@ -10,11 +10,19 @@ import Search from "@/components/search";
 import Container from "@/components/container";
 import ErrorMessage from "@/components/error-message";
 import OrderBy from "@/components/order-by";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 interface Pagination {
+  first: number | null;
   prev: number | null;
   next: number | null;
+  last: number | null;
+  pages: number | null;
 }
 
 const Home = () => {
@@ -24,24 +32,30 @@ const Home = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
 
   const [paginationData, setPaginationData] = useState<Pagination>({
+    first: null,
     prev: null,
-    next: 2,
+    next: null,
+    last: null,
+    pages: null,
   });
 
-  const [pagination, setPagination] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/data?_page=${pagination}`
+          `http://localhost:3000/data?_page=${currentPage}`
         );
         const json = await response.json();
 
         setPaginationData({
+          first: json.first,
           prev: json.prev,
           next: json.next,
+          last: json.last,
+          pages: json.pages,
         });
         setMedicineData(json.data);
         setError("");
@@ -53,7 +67,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [pagination]);
+  }, [currentPage]);
 
   const orderByDate = (order: string) => setSelectedOption(order);
 
@@ -74,15 +88,31 @@ const Home = () => {
 
             <div className="buttons-container">
               <Button
+                className="button"
+                icon={<ChevronsLeft size={20} />}
+                disabled={currentPage === paginationData.first}
+                onClick={() => setCurrentPage(paginationData.first!)}
+              />
+              <Button
+                className="button"
                 icon={<ChevronLeft size={20} />}
                 disabled={paginationData.prev === null}
-                onClick={() => setPagination((prev) => prev - 1)}
+                onClick={() => setCurrentPage((prev) => prev - 1)}
               />
 
+              <p className="current-page">{currentPage}</p>
+
               <Button
+                className="button"
                 icon={<ChevronRight size={20} />}
                 disabled={paginationData.next === null}
-                onClick={() => setPagination((prev) => prev + 1)}
+                onClick={() => setCurrentPage((prev) => prev + 1)}
+              />
+              <Button
+                className="button"
+                icon={<ChevronsRight size={20} />}
+                disabled={currentPage === paginationData.last}
+                onClick={() => setCurrentPage(paginationData.last!)}
               />
             </div>
           </div>
