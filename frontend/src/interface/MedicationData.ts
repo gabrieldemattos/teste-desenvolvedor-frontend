@@ -1,3 +1,12 @@
+export interface IMedicationDataWithPagination {
+  first?: number | null;
+  prev?: number | null;
+  next?: number | null;
+  last?: number | null;
+  pages?: number | null;
+  data: IMedication[];
+}
+
 export interface IMedication {
   id: string;
   name: string;
