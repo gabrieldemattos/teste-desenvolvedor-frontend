@@ -1,12 +1,10 @@
 "use client";
 
-import MedicineCard from "@/components/medicine-card";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
-import { IMedication } from "@/interface/MedicationData";
 
 const Home = () => {
-  const [medicineData, setMedicineData] = useState<IMedication[]>([]);
+  const [medicineData, setMedicineData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -32,6 +30,12 @@ const Home = () => {
     <div className="container">
       <h1>Consulta de Medicamentos</h1>
 
+      {loading && !error && (
+        <div className="loading">
+          <Loading />
+        </div>
+      )}
+
       {error && <p className="error">{error}</p>}
 
       {!loading &&
@@ -45,11 +49,12 @@ const Home = () => {
             <p>
               Principais ativos:{" "}
               {medicine.active_principles.map(
-                (activePrinciple) => activePrinciple.name
+                (activePrinciple: any) => activePrinciple.name
               )}
             </p>
             <p>
-              Documentos: {medicine.documents.map((document) => document.type)}
+              Documentos:{" "}
+              {medicine.documents.map((document: any) => document.type)}
             </p>
           </div>
         ))}
