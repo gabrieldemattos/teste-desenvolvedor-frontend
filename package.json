@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "pdfmake": "^0.2.10",
-    "sass": "^1.75.0"
-  }
-}
