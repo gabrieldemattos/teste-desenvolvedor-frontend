@@ -9,6 +9,7 @@ import { orderBy } from "./helpers/order-by";
 import Search from "@/components/search";
 import Container from "@/components/container";
 import ErrorMessage from "@/components/error-message";
+import OrderBy from "@/components/order-by";
 
 interface Pagination {
   prev: number | null;
@@ -53,12 +54,16 @@ const Home = () => {
     fetchData();
   }, [pagination]);
 
+  const orderByDate = (order: string) => setSelectedOption(order);
+
   return (
     <Container>
       <div className="home-container">
         <h1>Consulta de Medicamentos</h1>
 
         <Search />
+
+        <OrderBy handleOrder={orderByDate} />
 
         {!loading && !error && medicineData.length > 0 && (
           <div className="medicines-container">

@@ -8,11 +8,14 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loading from "../loading";
 import ErrorMessage from "@/components/error-message";
+import OrderBy from "@/components/order-by";
+import { orderBy } from "../(home)/helpers/order-by";
 
 const SearchPage = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string>("");
   const searchParams = useSearchParams();
 
   const query = searchParams.get("q");
@@ -44,6 +47,8 @@ const SearchPage = () => {
         )
       : medicineData;
 
+  const orderByDate = (order: string) => setSelectedOption(order);
+
   return (
     <Container>
       <Search />
@@ -52,8 +57,10 @@ const SearchPage = () => {
         Resultados encontrados para <span>{query}</span>: {filteredData.length}
       </p>
 
+      <OrderBy handleOrder={orderByDate} />
+
       {filteredData && !loading && !error && (
-        <MedicineCard medicineData={filteredData} />
+        <MedicineCard medicineData={orderBy(filteredData, selectedOption)} />
       )}
 
       {loading && <Loading />}
