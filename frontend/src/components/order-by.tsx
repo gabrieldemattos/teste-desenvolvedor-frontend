@@ -1,3 +1,4 @@
+import { ArrowUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 interface OrderByProps {
@@ -13,7 +14,9 @@ const OrderBy = ({ handleOrder }: OrderByProps) => {
 
   return (
     <div className="order-container">
-      <label>Ordenar por data de emissão: </label>
+      <label>
+        <ArrowUpDown size={16} /> Ordenar por data de emissão:{" "}
+      </label>
       <select
         className="order-select"
         name="order"

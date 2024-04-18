@@ -6,31 +6,12 @@
   }
 }
 
-.order-container {
-  margin-bottom: 20px;
-
-  label {
-    font-size: 17px;
-    font-weight: bold;
-    margin-right: 3px;
-  }
-
-  select {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 5px;
-    outline: none;
-  }
-}
-
-.medicines-container {
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 
   button {
     @include button-styles("secondary");

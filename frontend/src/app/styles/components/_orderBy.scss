@@ -1,0 +1,25 @@
+.order-container {
+  @extend .flex-container;
+
+  gap: 5px;
+  justify-content: initial;
+  margin-bottom: 20px;
+
+  label {
+    @extend .flex-container;
+
+    justify-content: initial;
+    gap: 6px;
+    font-size: 17px;
+    font-weight: bold;
+    margin-right: 3px;
+  }
+
+  select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    padding: 5px;
+    outline: none;
+  }
+}

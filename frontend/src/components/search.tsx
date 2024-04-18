@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import Button from "./button";
 import { useRouter } from "next/navigation";
+import { SearchSlash } from "lucide-react";
 
 const Search = () => {
   const [search, setSearch] = useState<string>("");
@@ -21,7 +22,11 @@ const Search = () => {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <Button text="Buscar" type="submit" onClick={handleSearch} />
+      <Button
+        icon={<SearchSlash size={16} />}
+        text="Buscar"
+        onClick={handleSearch}
+      />
     </form>
   );
 };

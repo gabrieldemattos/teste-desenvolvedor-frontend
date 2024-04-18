@@ -10,6 +10,7 @@ import Search from "@/components/search";
 import Container from "@/components/container";
 import ErrorMessage from "@/components/error-message";
 import OrderBy from "@/components/order-by";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Pagination {
   prev: number | null;
@@ -66,20 +67,20 @@ const Home = () => {
         <OrderBy handleOrder={orderByDate} />
 
         {!loading && !error && medicineData.length > 0 && (
-          <div className="medicines-container">
+          <div>
             <MedicineCard
               medicineData={orderBy(medicineData, selectedOption)}
             />
 
-            <div className="buttons">
+            <div className="buttons-container">
               <Button
-                text="<"
+                icon={<ChevronLeft size={20} />}
                 disabled={paginationData.prev === null}
                 onClick={() => setPagination((prev) => prev - 1)}
               />
 
               <Button
-                text=">"
+                icon={<ChevronRight size={20} />}
                 disabled={paginationData.next === null}
                 onClick={() => setPagination((prev) => prev + 1)}
               />
