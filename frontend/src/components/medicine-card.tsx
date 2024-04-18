@@ -1,3 +1,4 @@
+import { generateBulaPDF } from "@/helpers/generate-pdf";
 import MedicineInformation from "./medicine-information";
 import Button from "./button";
 import { IMedication } from "@/interface/MedicationData";
@@ -38,9 +39,19 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
               </p>
 
               <div className="button-wrapper">
-                <Button text={`Fazer download em PDF`} />
+                <Button
+                  text={`Fazer download em PDF`}
+                  onClick={() =>
+                    generateBulaPDF(medicine, document.type, "download")
+                  }
+                />
 
-                <Button text={`Abrir bula em PDF`} />
+                <Button
+                  text={`Abrir bula em PDF`}
+                  onClick={() =>
+                    generateBulaPDF(medicine, document.type, "open")
+                  }
+                />
               </div>
             </div>
           ))}
