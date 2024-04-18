@@ -28,7 +28,7 @@ O teste consistiu em criar uma aplicação em React para um bulário eletrônico
 
 ## Como Executar o Projeto ⚙️
 
-1. Clone este repositório: `git clone https://github.com/seu-usuario/bulario-eletronico.git`
+1. Clone este repositório: `git clone https://github.com/gabrieldemattos/teste-desenvolvedor-frontend.git`
 2. Navegue até o diretório do projeto: `cd frontend`
 3. Instale as dependências: `npm install`
 4. Carregue a API
