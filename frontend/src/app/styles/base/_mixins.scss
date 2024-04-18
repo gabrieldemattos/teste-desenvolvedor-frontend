@@ -2,6 +2,7 @@
   @if $val == "primary" {
     @extend .button-base;
 
+    gap: 8px;
     background: rgb(230, 227, 227);
     color: #000;
     font-weight: 500;
@@ -14,6 +15,7 @@
   @if $val == "secondary" {
     @extend .button-base;
 
+    gap: 8px;
     background: #007bff;
     color: #fff;
     font-weight: 500;

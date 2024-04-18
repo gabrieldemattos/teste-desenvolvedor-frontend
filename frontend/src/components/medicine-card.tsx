@@ -3,6 +3,7 @@ import MedicineInformation from "./medicine-information";
 import Button from "./button";
 import { IMedication } from "@/interface/MedicationData";
 import { formatDate } from "@/helpers/format-date";
+import { Download, FileText } from "lucide-react";
 
 interface MedicineCardProps {
   medicineData: IMedication[];
@@ -41,6 +42,7 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
 
               <div className="button-wrapper">
                 <Button
+                  icon={<Download size={16} />}
                   text={`Fazer download em PDF`}
                   onClick={() =>
                     generateBulaPDF(medicine, document.type, "download")
@@ -48,6 +50,7 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
                 />
 
                 <Button
+                  icon={<FileText size={16} />}
                   text={`Abrir bula em PDF`}
                   onClick={() =>
                     generateBulaPDF(medicine, document.type, "open")
