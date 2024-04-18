@@ -6,6 +6,8 @@ import Loading from "../loading";
 import { IMedication } from "@/interface/MedicationData";
 import Button from "@/components/button";
 import { orderBy } from "./helpers/order-by";
+import Search from "@/components/search";
+import Container from "@/components/container";
 
 interface Pagination {
   prev: number | null;
@@ -64,62 +66,43 @@ const Home = () => {
       : medicineData;
 
   return (
-    <div className="container">
-      <h1>Consulta de Medicamentos</h1>
+    <Container>
+      <div className="home-container">
+        <h1>Consulta de Medicamentos</h1>
 
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Busque pelo nome do medicamento ou laboratório.."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <Search />
 
-        <Button text="Buscar" />
-      </div>
-
-      <div className="order-container">
-        <label>Ordenar por data de emissão: </label>
-        <select
-          className="order-select"
-          name="order"
-          value={selectedOption}
-          onChange={(e) => setSelectedOption(e.target.value)}
-        >
-          <option value="">Escolha uma opção</option>
-          <option value="newest">Mais novas</option>
-          <option value="oldest">Mais antigas</option>
-        </select>
-      </div>
-
-      {!loading && !error && medicineData.length > 0 && (
-        <div className="medicines-container">
-          <MedicineCard medicineData={orderBy(filteredData, selectedOption)} />
-
-          <div className="buttons">
-            <Button
-              text="<"
-              disabled={paginationData.prev === null}
-              onClick={() => setPagination((prev) => prev - 1)}
+        {!loading && !error && medicineData.length > 0 && (
+          <div className="medicines-container">
+            <MedicineCard
+              medicineData={orderBy(filteredData, selectedOption)}
             />
 
-            <Button
-              text=">"
-              disabled={paginationData.next === null}
-              onClick={() => setPagination((prev) => prev + 1)}
-            />
+            <div className="buttons">
+              <Button
+                text="<"
+                disabled={paginationData.prev === null}
+                onClick={() => setPagination((prev) => prev - 1)}
+              />
+
+              <Button
+                text=">"
+                disabled={paginationData.next === null}
+                onClick={() => setPagination((prev) => prev + 1)}
+              />
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {loading && !error && (
-        <div className="loading">
-          <Loading />
-        </div>
-      )}
+        {loading && !error && (
+          <div className="loading">
+            <Loading />
+          </div>
+        )}
 
-      {error && <p className="error">{error}</p>}
-    </div>
+        {error && <p className="error">{error}</p>}
+      </div>
+    </Container>
   );
 };
 
