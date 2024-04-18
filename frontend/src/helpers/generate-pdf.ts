@@ -4,7 +4,6 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
 import { formatDate } from "./format-date";
 
-// Define as fontes necessárias
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export const filterExpedientNumber = (

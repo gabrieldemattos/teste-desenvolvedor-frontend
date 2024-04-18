@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import Loading from "../loading";
 import { IMedication } from "@/interface/MedicationData";
 import Button from "@/components/button";
+import { orderBy } from "./helpers/order-by";
 
 const Home = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [selectedOption, setSelectedOption] = useState<string>("");
 
   const [search, setSearch] = useState<string>("");
 
@@ -55,8 +57,22 @@ const Home = () => {
         <Button text="Buscar" />
       </div>
 
+      <div className="order-container">
+        <label>Ordenar por data de emissão: </label>
+        <select
+          className="order-select"
+          name="order"
+          value={selectedOption}
+          onChange={(e) => setSelectedOption(e.target.value)}
+        >
+          <option value="">Escolha uma opção</option>
+          <option value="newest">Mais novas</option>
+          <option value="oldest">Mais antigas</option>
+        </select>
+      </div>
+
       {!loading && !error && medicineData.length > 0 && (
-        <MedicineCard medicineData={filteredData} />
+        <MedicineCard medicineData={orderBy(filteredData, selectedOption)} />
       )}
 
       {loading && !error && (
