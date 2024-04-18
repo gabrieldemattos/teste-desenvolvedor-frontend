@@ -4,6 +4,7 @@ import Button from "./button";
 import { IMedication } from "@/interface/MedicationData";
 import { formatDate } from "@/helpers/format-date";
 import { Download, FileText } from "lucide-react";
+import { translateLeafletType } from "@/helpers/translate-leaflet-type";
 
 interface MedicineCardProps {
   medicineData: IMedication[];
@@ -37,7 +38,10 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
           {medicine.documents.map((document) => (
             <div className="button-container" key={document.id}>
               <p>
-                Bula para <span>{document.type}</span>
+                Bula para{" "}
+                <span>
+                  {translateLeafletType(document.type.toLowerCase() as any)}
+                </span>
               </p>
 
               <div className="button-wrapper">

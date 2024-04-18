@@ -3,6 +3,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
 import { formatDate } from "./format-date";
+import { translateLeafletType } from "./translate-leaflet-type";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -77,7 +78,12 @@ export const generateBulaPDF = (
       {
         text: [
           { text: "Tipo da bula:".toUpperCase(), style: "name" },
-          { text: ` ${documentsType}`, style: "data" },
+          {
+            text: ` ${translateLeafletType(
+              documentsType.toLowerCase() as any
+            )}`,
+            style: "data",
+          },
         ],
       },
     ],
