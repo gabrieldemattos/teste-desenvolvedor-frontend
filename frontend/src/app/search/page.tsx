@@ -5,39 +5,23 @@ import MedicineCard from "@/components/medicine-card";
 import Search from "@/components/search";
 import { IMedication } from "@/interface/MedicationData";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Loading from "../loading";
 import ErrorMessage from "@/components/error-message";
 import OrderBy from "@/components/order-by";
 import { orderBy } from "../(home)/helpers/order-by";
 import { accentsRemover, textMatchesQuery } from "./helpers/text-matches-query";
+import useFetchMedicine from "@/hooks/useFetchMedicine";
 
 const SearchPage = () => {
-  const [medicineData, setMedicineData] = useState<IMedication[]>([]);
-  const [error, setError] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string>("");
   const searchParams = useSearchParams();
 
   const query = searchParams.get("q");
+  const url = "http://localhost:3000/data";
 
-  useEffect(() => {
-    const fetchMedicines = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("http://localhost:3000/data");
-        const json = await response.json();
-
-        setMedicineData(json);
-      } catch (error) {
-        setError("Erro ao carregar os dados, tente novamente!");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (query) fetchMedicines();
-  }, [query]);
+  const { error, loading, data } = useFetchMedicine(url, query as string);
+  const medicineData = data as IMedication[];
 
   // checks whether the query is valid, that is, it is not null and has a length greater than zero
   const isQueryValid = query !== null && query.length > 0;
@@ -48,13 +32,14 @@ const SearchPage = () => {
     : null;
 
   // if the query is valid, filters the drugs that match the query
-  const filteredData = isQueryValid
-    ? medicineData.filter(
-        (item) =>
-          textMatchesQuery(item.name.toLowerCase(), lowercaseQuery) ||
-          textMatchesQuery(item.company.toLowerCase(), lowercaseQuery)
-      )
-    : medicineData;
+  const filteredData =
+    isQueryValid && medicineData
+      ? medicineData.filter(
+          (item) =>
+            textMatchesQuery(item.name.toLowerCase(), lowercaseQuery) ||
+            textMatchesQuery(item.company.toLowerCase(), lowercaseQuery)
+        )
+      : [];
 
   const orderByDate = (order: string) => setSelectedOption(order);
 
