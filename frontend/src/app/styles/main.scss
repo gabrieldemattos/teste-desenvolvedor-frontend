@@ -1,8 +1,11 @@
 @import "base/reset";
 @import "base/inheritance";
+@import "base/mixins";
 
 //pages
 @import "pages/home";
 
 //componets
+@import "components/medicineCard";
 @import "components/loading";
+@import "components/medicineInformation";

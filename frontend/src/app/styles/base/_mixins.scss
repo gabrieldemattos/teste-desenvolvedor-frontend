@@ -1,0 +1,23 @@
+@mixin button-styles($val) {
+  @if $val == "primary" {
+    @extend .button-base;
+
+    background: rgb(241, 237, 237);
+    color: #000;
+
+    &:hover {
+      background: rgb(228, 226, 226);
+    }
+  }
+
+  @if $val == "secondary" {
+    @extend .button-base;
+
+    background: #007bff;
+    color: #fff;
+
+    &:hover {
+      background: #0069d9;
+    }
+  }
+}
