@@ -7,11 +7,23 @@ import { IMedication } from "@/interface/MedicationData";
 import Button from "@/components/button";
 import { orderBy } from "./helpers/order-by";
 
+interface Pagination {
+  prev: number | null;
+  next: number | null;
+}
+
 const Home = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<string>("");
+
+  const [paginationData, setPaginationData] = useState<Pagination>({
+    prev: null,
+    next: 2,
+  });
+
+  const [pagination, setPagination] = useState<number>(1);
 
   const [search, setSearch] = useState<string>("");
 
@@ -19,9 +31,16 @@ const Home = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/data");
-        const data = await response.json();
-        setMedicineData(data);
+        const response = await fetch(
+          `http://localhost:3000/data?_page=${pagination}`
+        );
+        const json = await response.json();
+
+        setPaginationData({
+          prev: json.prev,
+          next: json.next,
+        });
+        setMedicineData(json.data);
         setError("");
       } catch (error) {
         setError("Erro ao carregar os dados, tente novamente!");
@@ -31,7 +50,9 @@ const Home = () => {
     };
 
     fetchData();
-  }, []);
+  }, [pagination]);
+
+  console.log(medicineData);
 
   const filteredData =
     search.length > 0
@@ -72,7 +93,23 @@ const Home = () => {
       </div>
 
       {!loading && !error && medicineData.length > 0 && (
-        <MedicineCard medicineData={orderBy(filteredData, selectedOption)} />
+        <div className="medicines-container">
+          <MedicineCard medicineData={orderBy(filteredData, selectedOption)} />
+
+          <div className="buttons">
+            <Button
+              text="<"
+              disabled={paginationData.prev === null}
+              onClick={() => setPagination((prev) => prev - 1)}
+            />
+
+            <Button
+              text=">"
+              disabled={paginationData.next === null}
+              onClick={() => setPagination((prev) => prev + 1)}
+            />
+          </div>
+        </div>
       )}
 
       {loading && !error && (

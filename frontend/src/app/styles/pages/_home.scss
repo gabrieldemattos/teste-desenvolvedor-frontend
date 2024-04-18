@@ -70,3 +70,16 @@
     outline: none;
   }
 }
+
+.medicines-container {
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  button {
+    @include button-styles("secondary");
+  }
+}
