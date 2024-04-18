@@ -1,0 +1,39 @@
+.loading-container {
+  @extend .flex-container;
+
+  height: 100%;
+  width: 100%;
+  background-color: #f9f9f9;
+
+  p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #757575;
+    text-align: center;
+  }
+}
+
+.loading-wrapper {
+  @extend .flex-container;
+
+  flex-direction: column;
+  gap: 20px;
+
+  .spiner {
+    height: 70px;
+    width: 70px;
+    border-bottom: 4px solid #007bff;
+    border-top: 4px solid #007bff;
+    border-radius: 100%;
+    animation: spiner 1s linear infinite;
+  }
+}
+
+@keyframes spiner {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
