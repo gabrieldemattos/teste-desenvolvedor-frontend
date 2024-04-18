@@ -17,52 +17,54 @@ const MedicineCard = ({ medicineData }: MedicineCardProps) => {
         <div className="card-container" key={medicine.id}>
           <h3>{medicine.name}</h3>
 
-          <MedicineInformation
-            dataName="Laboratório fabricante:"
-            dataInformation={medicine.company}
-          />
+          <div className="card-wrapper">
+            <MedicineInformation
+              dataName="Laboratório fabricante:"
+              dataInformation={medicine.company}
+            />
 
-          <MedicineInformation
-            dataName="Data de emissão:"
-            dataInformation={formatDate(medicine.published_at)}
-          />
+            <MedicineInformation
+              dataName="Data de emissão:"
+              dataInformation={formatDate(medicine.published_at)}
+            />
 
-          <MedicineInformation
-            dataName="Ativo(os) principal(ais):"
-            dataInformation={medicine.active_principles.map(
-              (activePrinciple, index) =>
-                index > 0 ? `, ${activePrinciple.name}` : activePrinciple.name
-            )}
-          />
+            <MedicineInformation
+              dataName="Ativo(os) principal(ais):"
+              dataInformation={medicine.active_principles.map(
+                (activePrinciple, index) =>
+                  index > 0 ? `, ${activePrinciple.name}` : activePrinciple.name
+              )}
+            />
 
-          {medicine.documents.map((document) => (
-            <div className="button-container" key={document.id}>
-              <p>
-                Bula para{" "}
-                <span>
-                  {translateLeafletType(document.type.toLowerCase() as any)}
-                </span>
-              </p>
+            {medicine.documents.map((document) => (
+              <div className="button-container" key={document.id}>
+                <p>
+                  Bula para{" "}
+                  <span>
+                    {translateLeafletType(document.type.toLowerCase() as any)}:
+                  </span>
+                </p>
 
-              <div className="button-wrapper">
-                <Button
-                  icon={<Download size={16} />}
-                  text={`Fazer download em PDF`}
-                  onClick={() =>
-                    generateBulaPDF(medicine, document.type, "download")
-                  }
-                />
+                <div className="button-wrapper">
+                  <Button
+                    icon={<Download size={16} />}
+                    text={`Fazer download em PDF`}
+                    onClick={() =>
+                      generateBulaPDF(medicine, document.type, "download")
+                    }
+                  />
 
-                <Button
-                  icon={<FileText size={16} />}
-                  text={`Abrir bula em PDF`}
-                  onClick={() =>
-                    generateBulaPDF(medicine, document.type, "open")
-                  }
-                />
+                  <Button
+                    icon={<FileText size={16} />}
+                    text={`Abrir bula em PDF`}
+                    onClick={() =>
+                      generateBulaPDF(medicine, document.type, "open")
+                    }
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </div>
