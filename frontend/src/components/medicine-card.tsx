@@ -1,29 +1,9 @@
 import MedicineInformation from "./medicine-information";
 import Button from "./button";
-
-interface Medication {
-  id: string;
-  name: string;
-  published_at: string;
-  company: string;
-  documents: Document[];
-  active_principles: ActivePrinciple[];
-}
-
-interface ActivePrinciple {
-  id: string;
-  name: string;
-}
-
-interface Document {
-  id: string;
-  expedient: string;
-  type: string;
-  url: string;
-}
+import { IMedication } from "@/interface/MedicationData";
 
 interface MedicineCardProps {
-  medicineData: Medication[];
+  medicineData: IMedication[];
 }
 
 const MedicineCard = ({ medicineData }: MedicineCardProps) => {
