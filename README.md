@@ -1,6 +1,6 @@
 # Guia para acessar o projeto completo
 
-<b>Para acessar o teste você deve nesse mesmo arquivo ir para a branch com o nome "gabriel-de-mattos".</b>
+<b>Para acessar o teste completo, você deve nesse mesmo arquivo ir para a branch com o nome "gabriel-de-mattos".</b>
 
 [![](https://dotlib.com/theme/img/logos/logo.png)](https://www.dotlib.com)
 
