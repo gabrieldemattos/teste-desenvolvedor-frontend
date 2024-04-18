@@ -10,6 +10,7 @@ import Loading from "../loading";
 import ErrorMessage from "@/components/error-message";
 import OrderBy from "@/components/order-by";
 import { orderBy } from "../(home)/helpers/order-by";
+import { accentsRemover, textMatchesQuery } from "./helpers/text-matches-query";
 
 const SearchPage = () => {
   const [medicineData, setMedicineData] = useState<IMedication[]>([]);
@@ -38,14 +39,22 @@ const SearchPage = () => {
     if (query) fetchMedicines();
   }, [query]);
 
-  const filteredData =
-    query && medicineData && query.length > 0
-      ? medicineData.filter(
-          (item) =>
-            item.name.toLowerCase().includes(query.toLowerCase()) ||
-            item.company.toLowerCase().includes(query.toLowerCase())
-        )
-      : medicineData;
+  // checks whether the query is valid, that is, it is not null and has a length greater than zero
+  const isQueryValid = query !== null && query.length > 0;
+
+  // if the query is valid, convert it to lowercase and remove accents
+  const lowercaseQuery = isQueryValid
+    ? accentsRemover(query.toLowerCase())
+    : null;
+
+  // if the query is valid, filters the drugs that match the query
+  const filteredData = isQueryValid
+    ? medicineData.filter(
+        (item) =>
+          textMatchesQuery(item.name.toLowerCase(), lowercaseQuery) ||
+          textMatchesQuery(item.company.toLowerCase(), lowercaseQuery)
+      )
+    : medicineData;
 
   const orderByDate = (order: string) => setSelectedOption(order);
 
